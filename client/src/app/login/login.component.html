@@ -4,16 +4,22 @@
       <div class="logo-wrapper tc">
         <img src="/assets/logo_with_text.png" />
       </div>
-      <form class="example-form">
+      <form #loginform="ngForm" class="example-form" (ngSubmit)="login()" autocomplete="off">
         <div class="tc"></div>
         <h1>Login</h1>
         <div class="description">Zawsze i wszędzie
           utrzymuj kontakt ze znajomymi
           Just Chatting sprawia, że utrzymywanie bliskiego kontaktu z ludźmi, których najbardziej lubisz, jest łatwe i przyjemne.</div>
 
-        <input type="text" nbInput fullWidth placeholder="Email" />
+        <input 
+            name="username"
+            [(ngModel)]="model.username"
+            type="username" nbInput fullWidth placeholder="Email" />
 
-        <input type="password" nbInput fullWidth placeholder="Password" />
+        <input 
+            name="password"
+            [(ngModel)]="model.password"
+            type="password" nbInput fullWidth placeholder="Password" />
         <div class="tr">
           <button nbButton status="primary" shape="round">Login</button>
         </div>
