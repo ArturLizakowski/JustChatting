@@ -1,27 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { AnonymousSubject } from 'rxjs/internal/Subject';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `<nb-layout [center]="false" [withScroll]="false" [windowMode]="false">
+    <nb-layout-column [start]="true" ><router-outlet></router-outlet></nb-layout-column>
+    
+  </nb-layout>`
 })
-export class AppComponent implements OnInit {
-  title = 'JustChatting!';
-  users: any;
-
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
-      this.getUsers();
-    }
-
-    getUsers() {
-      this.http.get('https://localhost:5001/api/users').subscribe(response => {
-      this.users = response;
-    }, error => {
-      console.log(error);
-    })
-  }
-}
+export class AppComponent {}
