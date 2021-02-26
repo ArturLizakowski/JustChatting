@@ -1,10 +1,17 @@
-<div class="login-form">  
+<div class="login-form"> 
+  <nav class="navbar navbar-light bg-light justify-content-between" *ngIf="(userService.currentUser$| async)">
+    <form class="form-inline">
+      <div class="tr">
+        <button nbButton status="primary" shape="round" (click)="logout()">Logout</button>
+      </div>
+    </form>
+  </nav>
   <nb-card>
     <nb-card-body class="example-items-rows">
       <div class="logo-wrapper tc">
         <img src="/assets/logo_with_text.png" />
       </div>
-      <form #loginform="ngForm" class="example-form" (ngSubmit)="login()" autocomplete="off">
+      <form *ngIf="(userService.currentUser$| async) === null" #loginform="ngForm" class="example-form" (ngSubmit)="login()" autocomplete="off">
         <div class="tc"></div>
         <h1>Login</h1>
         <div class="description">Zawsze i wszędzie
@@ -19,9 +26,10 @@
         <input 
             name="password"
             [(ngModel)]="model.password"
-            type="password" nbInput fullWidth placeholder="Password" />
+          type="password" nbInput fullWidth placeholder="Password" />
         <div class="tr">
-          <button nbButton status="primary" shape="round">Login</button>
+          <button class="tr-center" nbButton status="primary" shape="round">Login</button>
+          <button class="tr-center" nbButton status="primary" shape="round">Register</button>
         </div>
       </form>
     </nb-card-body>

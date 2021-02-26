@@ -8,9 +8,10 @@ import { ChatHostComponent } from './chat-host/chat-host.component';
 import { LoginComponent } from './login/login.component';
 import { NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbThemeModule, NbSidebarModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, ChatHostComponent, LoginComponent],
+  declarations: [AppComponent, ChatHostComponent, LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

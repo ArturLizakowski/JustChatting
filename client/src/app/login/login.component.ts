@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { UserService } from 'src/services/user.service';
+import { User } from '../models/user';
 
 
 @Component({
@@ -11,8 +14,10 @@ export class LoginComponent implements OnInit {
 
   model: any = {}
   loggedIn: boolean;
+  standardLoginIsWorking = false;
+  formWasValidated = false;
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
   }
@@ -20,11 +25,15 @@ export class LoginComponent implements OnInit {
   login() {
     this.userService.login(this.model).subscribe(response => {
       console.log(response);
-      this.loggedIn = true;
     }, error => {
       console.log(error);
     })
     //console.log(this.model)
   }
 
+  logout() {
+    this.userService.logout();
+  }
+    
+  
 }

@@ -1,0 +1,25 @@
+<div class="login-form"> 
+  <nb-card>
+    <nb-card-body class="example-items-rows">
+      <div class="logo-wrapper tc">
+        <img src="/assets/logo_with_text.png" />
+      </div>
+      <form #loginform="ngForm" class="example-form"  autocomplete="off">
+        <div class="tc"></div>
+        <h1>Login</h1>
+        <div class="description">Dołącz do społeczności JustChatting!</div>
+        <input 
+            name="username"
+            type="username" nbInput fullWidth placeholder="Email" />
+
+        <input 
+            name="password"
+          type="password" nbInput fullWidth placeholder="Password" />
+        <div class="tr">
+          <button class="tr-center" nbButton status="primary" shape="round">Login</button>
+        </div>
+        <button class="tr-center" nbButton status="primary" shape="round">Register</button>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>
