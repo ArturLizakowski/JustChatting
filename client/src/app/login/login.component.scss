@@ -1,30 +1,41 @@
-.login-form{  
-  height: calc(100vh - 50px);
-  width: 80%;
-  margin: auto;
-  display: flex;
-  justify-content: center;  
-  align-items: center;
-  .logo-wrapper{
-    
-    img{
-      max-height: 500px;
-      
+.login-form {
+  h1 {
+    margin-bottom: 10px;
+    background-image: linear-gradient(
+      83.84deg,
+      #0088ff -6.87%,
+      #a033ff 26.54%,
+      #ff5c87 58.58%
+    );
+    -webkit-background-clip: text;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+  .description{
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .logo-wrapper {
+    img {
+      width: 40%;
     }
   }
-  input{
+
+  input {
     margin-bottom: 0.5rem;
   }
-  
-  form {    
-    img{
+
+  form {
+    img {
       max-width: 300px;
-      margin-top: 100px;      
+      margin-top: 100px;
     }
-    width: 50%;
   }
 }
 
-mat-form-field{
+mat-form-field {
   display: block;
 }
