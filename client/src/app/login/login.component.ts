@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     this.working = true;
     this.userService.login(this.model).subscribe(
       (response) => {
+        this.router.navigateByUrl('/chatapp');
         this.notification.success(
           `Hello again ${response.displayName}`,
           'Welcome'

@@ -1,10 +1,14 @@
-<p>
-  chat-host works!
-</p>
-><nav class="navbar navbar-light bg-light justify-content-between">
-  <form class="form-inline">
-    <div class="tr">
-      <button nbButton status="primary" shape="round">Logout</button>
+<nb-layout>
+  <nb-layout-header>
+    <div class="flex-justify">
+      <div>
+        Welcome again {{ (this.userService.currentUser$ | async).displayName }}
+      </div>
+      <div class="tr">
+        <button nbButton status="primary" shape="round">Logout</button>
+      </div>
     </div>
-  </form>
-</nav>
+  </nb-layout-header>
+  <nb-layout-column class="colored-column-warning">CONTACTS</nb-layout-column>
+  <nb-layout-column class="colored-column-danger">CHAT</nb-layout-column>
+</nb-layout>
