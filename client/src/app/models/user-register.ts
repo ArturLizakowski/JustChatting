@@ -1,6 +1,6 @@
 export interface UserRegister {
   email: string;
-  nick: string;
+  displayName: string;
   password: string;
   repeatPassword: string;
 }

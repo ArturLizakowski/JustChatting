@@ -1,39 +1,51 @@
-<div class="login-form"> 
-  <div class="logo-wrapper tc">
-    <img src="/assets/logo_with_text.png" />
+<form #form="ngForm" (ngSubmit)="login()" [nbSpinner]="working" autocomplete="off">
+  <div class="tc"></div>
+  <h1>Login</h1>
+  <div class="description">
+    Just chatting makes it easy and fun to stay close to your favorite people.
   </div>
 
-  <nb-card>
-    <nb-card-body class="example-items-rows">
-      
-      <form *ngIf="(userService.currentUser$| async) === null" #loginform="ngForm" class="example-form" (ngSubmit)="login()" autocomplete="off">
-        <div class="tc"></div>
-        <h1>Login</h1>
-        <div class="description">Just chatting makes it easy and fun to stay close to your favorite people.</div>
-
-        <input 
-            name="username"
-            [(ngModel)]="model.userName"
-            required
-            type="username" nbInput fullWidth placeholder="Email" />
-
-        <input 
-            name="password"
-            [(ngModel)]="model.password"
-            required
-            type="password" nbInput fullWidth placeholder="Password" />
-        <div class="buttons">
-          <a [routerLink]="[ '/register']">Dont have an account yet?</a>
-          <button nbButton status="primary" shape="round">Login</button>
-        </div>
-      </form>
-    </nb-card-body>
-  </nb-card>
-</div>
-<div *ngIf="registerMode" class="container">
-  <div class="register-form">
-    <div class="tc">
-      <app-register></app-register>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      name="email"
+      [(ngModel)]="model.email"
+      required
+      #emailControl="ngModel"
+      type="email"
+      email
+      nbInput
+      fullWidth
+      placeholder="luke.skywalker@jedi.com"
+    />
+    <div class="validation" *ngIf="emailControl.dirty && emailControl.invalid">
+      Provided email is not in correct format
     </div>
   </div>
-</div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      name="password"
+      [(ngModel)]="model.password"
+      required
+      type="password"
+      #passwordControl="ngModel"
+      nbInput
+      fullWidth
+      placeholder="Enter your secret password here"
+    />
+    <div
+      class="validation"
+      *ngIf="passwordControl.dirty && passwordControl.invalid"
+    >
+      Password is required
+    </div>
+  </div>
+  <div class="buttons">
+    <a [routerLink]="['/register']">Dont have an account yet?</a>
+    <button nbButton [disabled]="form.invalid" status="primary" shape="round">
+      Login
+    </button>
+  </div>
+</form>

@@ -1,5 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
+// this is our just created themes.scss file, make sure the path to the file is correct
+@import 'theme';
+
+// framework component styles
+@import '~@nebular/theme/styles/globals';
+
+// install the framework styles
+@include nb-install() {
+  @include nb-theme-global();
+};
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -13,4 +24,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .nb-theme-default a{
   text-decoration: none;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.form-group{
+  margin-bottom: 0.5rem;
+
+  label{    
+    font-size: 0.7rem;
+    color: nb-theme(color-info-700);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  input {
+  }
 }

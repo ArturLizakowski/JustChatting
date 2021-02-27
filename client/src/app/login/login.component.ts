@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NbToastrService } from '@nebular/theme';
 import { Observable } from 'rxjs';
-import { UserLogin } from 'src/models/user-login';
-import { UserService } from 'src/services/user.service';
+import { UserLogin } from 'src/app/models/user-login';
+import { UserService } from 'src/app/services/user.service';
 import { User } from '../models/user';
-
 
 @Component({
   selector: 'app-login',
@@ -12,29 +13,37 @@ import { User } from '../models/user';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
-  registerMode = false;
-
   model: UserLogin = {
-    userName: '',
-    password: '',
+    email: 'test@wp.pl',
+    password: 'Test1234',
   };
-  
-  loggedIn: boolean;
-  standardLoginIsWorking = false;
-  formWasValidated = false;
 
-  constructor(public userService: UserService) { }
+  working = false;
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private notification: NbToastrService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   login() {
-    this.userService.login(this.model).subscribe(response => {
-      console.log(response);
-    }, error => {
-      console.log(error);
-    })
+    this.working = true;
+    this.userService.login(this.model).subscribe(
+      (response) => {
+        this.notification.success(
+          `Hello again ${response.displayName}`,
+          'Welcome'
+        );
+      },
+      (error) => {
+        this.notification.danger(
+          'User name or password is not correct',
+          'Error'
+        );
+        console.log(error);
+      }
+    );
     //console.log(this.model)
-  }  
+  }
 }

@@ -14,17 +14,29 @@ import {
   NbThemeModule,
   NbSidebarModule,
   NbSpinnerModule,
+  NbToastrModule,
 } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
+import { FullScreenLayoutComponent } from './full-screen-layout/full-screen-layout.component';
+import { EqualValidator } from './validators/equal-validator';
+import { PasswordStrengthValidator } from './validators/password-strength-validator';
+
+const components = [
+  AppComponent,
+  ChatHostComponent,
+  LoginComponent,
+  RegisterComponent,
+  FullScreenLayoutComponent,
+];
+
+const validators = [
+  EqualValidator,
+  PasswordStrengthValidator
+]
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChatHostComponent,
-    LoginComponent,
-    RegisterComponent,
-  ],
+  declarations: [...components, ...validators],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,6 +44,7 @@ import { RegisterComponent } from './register/register.component';
     BrowserAnimationsModule,
     NbSidebarModule.forRoot(),
     NbThemeModule.forRoot(),
+    NbToastrModule.forRoot(),
     NbLayoutModule,
     NbCardModule,
     NbInputModule,

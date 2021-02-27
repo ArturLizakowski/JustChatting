@@ -1,67 +1,101 @@
-<div class="login-form">
-  <div class="logo-wrapper tc">
-    <img src="/assets/logo_with_text.png" />
+<form
+  #form="ngForm"
+  (ngSubmit)="register()"
+  autocomplete="off"
+  [nbSpinner]="working"
+>
+  <div class="tc"></div>
+  <h1>Register</h1>
+  <div class="description">
+    Just chatting makes it easy and fun to stay close to your favorite people.
   </div>
-  <nb-card [nbSpinner]="working">
-    <nb-card-body class="example-items-rows">
-      <form
-        #form="ngForm"
-        class="example-form"
-        (ngSubmit)="register()"
-        autocomplete="off"        
-      >
-        <div class="tc"></div>
-        <h1>Register</h1>
-        <div class="description">
-          Just chatting makes it easy and fun to stay close to your favorite
-          people.
-        </div>
 
-        <input
-          name="username"
-          [(ngModel)]="model.email"
-          required
-          type="email"
-          nbInput
-          fullWidth
-          placeholder="Email"
-        />
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      name="email"
+      [(ngModel)]="model.email"
+      required
+      #emailControl="ngModel"
+      type="email"
+      email
+      nbInput
+      fullWidth
+      placeholder="luke.skywalker@jedi.com"
+    />
+    <div class="validation" *ngIf="emailControl.dirty && emailControl.invalid">
+      Provided email is not in correct format
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="displayName">Display name</label>
+    <input
+      name="displayName"
+      [(ngModel)]="model.displayName"
+      required
+      type="text"
+      #displayNameControl="ngModel"
+      nbInput
+      fullWidth
+      placeholder="Nickname"
+    />
+    <div
+      class="validation"
+      *ngIf="displayNameControl.dirty && displayNameControl.invalid"
+    >
+      This field is required
+    </div>
+  </div>
 
-        <input
-          name="nick"
-          [(ngModel)]="model.nick"
-          required
-          type="text"
-          nbInput
-          fullWidth
-          placeholder="Nickname"
-        />
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      name="password"
+      [(ngModel)]="model.password"
+      required
+      type="password"
+      #passwordControl="ngModel"
+      appPasswordStrength
+      nbInput
+      fullWidth
+      placeholder="Enter your secret password here"
+    />
+    <div
+      class="validation"
+      *ngIf="passwordControl.dirty && passwordControl.invalid"
+    >
+      Password did not meet our security expectation.
+    </div>
+  </div>
 
-        <input
-          name="password"
-          [(ngModel)]="model.password"
-          required
-          type="password"
-          nbInput
-          fullWidth
-          placeholder="Password"
-        />
+  <div class="form-group">
+    <label for="nick">Repeat password</label>
+    <input
+      name="repeatPassword"
+      [(ngModel)]="model.repeatPassword"
+      required
+      type="password"
+      #repeatPasswordControl="ngModel"
+      nbInput
+      appValidateEqual="password"
+      fullWidth
+      placeholder="Reenter your password just to make sure it is correct"
+    />
+    <div
+      class="validation"
+      *ngIf="
+        (forceShowError || repeatPasswordControl.dirty) &&
+        repeatPasswordControl.invalid
+      "
+    >
+      Repeat password is required
+    </div>
+  </div>
 
-        <input
-          name="password"
-          [(ngModel)]="model.password"
-          required
-          type="password"
-          nbInput
-          fullWidth
-          placeholder="Repeat password"
-        />
-
-        <div class="buttons">
-          <a [routerLink]="['/']">Already have an account?</a>
-          <button nbButton status="primary" shape="round">Register</button>
-        </div>
-      </form>
-    </nb-card-body>
-  </nb-card>
-</div>
+  <div class="buttons">
+    <a [routerLink]="['/']">Already have an account?</a>
+    <button [disabled]="form.invalid" nbButton status="primary" shape="round">
+      Register
+    </button>
+  </div>
+</form>
