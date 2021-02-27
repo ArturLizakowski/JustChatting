@@ -5,16 +5,18 @@
         Welcome again {{ (this.userService.currentUser$ | async).displayName }}
       </div>
       <div class="tr">
-        <button nbButton status="primary" shape="round" (click)="logout()">Logout</button>
+        <button nbButton status="primary" shape="round" (click)="logout()">
+          Logout
+        </button>
       </div>
     </div>
   </nb-layout-header>
   <nb-sidebar>
-    <app-chat-contact-list></app-chat-contact-list>
+    <app-chat-contact-list
+      (activeFriendChange)="friendChanged($event)"
+    ></app-chat-contact-list>
   </nb-sidebar>
-  <nb-layout-column class="colored-column-warning">
-  </nb-layout-column>
   <nb-layout-column class="colored-column-danger">
-    <app-chat-messenger></app-chat-messenger>
+    <app-chat-messenger [friendInput]="activeFriend"></app-chat-messenger>
   </nb-layout-column>
 </nb-layout>

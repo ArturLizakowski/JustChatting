@@ -1,5 +1,23 @@
+<<<<<<< HEAD
 <nb-chat title="Conversation" size="large">
   <nb-chat-message [(ngModel)]="model.content">
+=======
+<div *ngIf="!friend">
+  No conversation selected.
+</div>
+<nb-chat *ngIf="friend" [title]="friend.displayName" size="large">
+  <nb-chat-message *ngFor=""
+                   [type]="msg.type"
+                   [message]="msg.text"
+                   [reply]="msg.reply"
+                   [sender]="msg.user.name"
+                   [date]="msg.date"
+                   [files]="msg.files"
+                   [quote]="msg.quote"
+                   [latitude]="msg.latitude"
+                   [longitude]="msg.longitude"
+                   [avatar]="msg.user.avatar">
+>>>>>>> 91ec6fdf919281781614d5b704b3d19ccd52e489
   </nb-chat-message>
   <nb-chat-form  [dropFiles]="true">
   </nb-chat-form>

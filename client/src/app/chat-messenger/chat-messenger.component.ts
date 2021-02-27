@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Message } from '../models/message';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,25 +9,33 @@ import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
 
+=======
+import { Component, Input, OnInit } from '@angular/core';
+import { NbToastrService, NbChatModule } from '@nebular/theme';
+import { Friend } from '../models/friend-request';
+>>>>>>> 91ec6fdf919281781614d5b704b3d19ccd52e489
 
 @Component({
   selector: 'app-chat-messenger',
   templateUrl: './chat-messenger.component.html',
-  providers: [ ],
-  styles: [`
-    ::ng-deep nb-layout-column {
-      justify-content: center;
-      display: flex;
-    }
-    nb-chat {
-      width: 1650px;
-      height: 1000px;
-    }
-  `],
+  providers: [],
+  styles: [
+    `
+      ::ng-deep nb-layout-column {
+        justify-content: center;
+        display: flex;
+      }
+      nb-chat {
+        width: 1650px;
+        height: 1000px;
+      }
+    `,
+  ],
 })
-
 export class ChatMessengerComponent implements OnInit {
+  public friend: Friend;
 
+<<<<<<< HEAD
   model: AddMessageDto = {
     content: ""
   };
@@ -66,4 +75,14 @@ export class ChatMessengerComponent implements OnInit {
       error => {}
     );
   }
+=======
+  @Input() public set friendInput(v: Friend) {
+    this.friend = v;
+    //// TUTAJ MOŻESZ OBSŁUŻYĆ ZAŁADOWANIE WIADOMOŚCI JAK INNY PRZYJACIEL ZOSTANIE WYBRANY
+  }
+
+  constructor() {}
+
+  ngOnInit(): void {}
+>>>>>>> 91ec6fdf919281781614d5b704b3d19ccd52e489
 }
