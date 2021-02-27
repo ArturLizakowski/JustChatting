@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -7,5 +8,10 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./chat-host.component.scss'],
 })
 export class ChatHostComponent {  
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService, public router: Router) {}
+
+  logout() {
+    this.router.navigate(['/login'])
+    this.userService.logout();
+  }
 }
