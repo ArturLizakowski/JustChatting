@@ -15,6 +15,8 @@ namespace API.Data
 
 		public DbSet<FriendRequest> FriendRequests { get; set; }
 
+    public DbSet<Message> Messages { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);

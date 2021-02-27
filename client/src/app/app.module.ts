@@ -16,6 +16,7 @@ import {
   NbSpinnerModule,
   NbToastrModule,
   NbAutocompleteModule,
+  NbChatModule
 } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
@@ -24,6 +25,7 @@ import { EqualValidator } from './validators/equal-validator';
 import { PasswordStrengthValidator } from './validators/password-strength-validator';
 import { ChatContactListComponent } from './chat-contact-list/chat-contact-list.component';
 import { TokenInterceptor } from './interceptors/token-interceptor';
+import { ChatMessengerComponent } from './chat-messenger/chat-messenger.component';
 
 const components = [
   AppComponent,
@@ -32,6 +34,7 @@ const components = [
   LoginComponent,
   RegisterComponent,
   FullScreenLayoutComponent,
+  ChatMessengerComponent
 ];
 
 const validators = [EqualValidator, PasswordStrengthValidator];
@@ -53,6 +56,7 @@ const validators = [EqualValidator, PasswordStrengthValidator];
     NbSpinnerModule,
     NbButtonModule,
     FormsModule,
+    NbChatModule
   ],
   providers: [
     {
