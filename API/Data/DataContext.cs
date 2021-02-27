@@ -18,7 +18,7 @@ namespace API.Data
 
 		public DbSet<FriendRequest> FriendRequests { get; set; }
 
-    public DbSet<Message> Messages { get; set; }
+		public DbSet<Message> Messages { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -44,6 +44,15 @@ namespace API.Data
 				.WithMany()
 				.HasForeignKey(x => x.FriendId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
+			modelBuilder.Entity<Message>()
+				.HasOne(x => x.Author)
+				.WithMany()
+				.HasForeignKey(x => x.AuthorId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+
+			modelBuilder.Entity<Message>()
+				.HasOne(x => x.Recipient)
+				.WithMany()
+				.HasForeignKey(x => x.RecipientId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 		}
 
 		public async Task<IEnumerable<FriendRequestRecord>> GetFriendRequestsForUser(int userId)
