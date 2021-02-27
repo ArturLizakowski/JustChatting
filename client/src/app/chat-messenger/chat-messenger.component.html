@@ -1,4 +1,7 @@
-<nb-chat title="Conversation" size="large">
+<div *ngIf="!friend">
+  No conversation selected.
+</div>
+<nb-chat *ngIf="friend" [title]="friend.displayName" size="large">
   <nb-chat-message *ngFor=""
                    [type]="msg.type"
                    [message]="msg.text"

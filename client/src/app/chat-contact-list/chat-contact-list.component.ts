@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -17,6 +19,8 @@ import { UserService } from '../services/user.service';
 export class ChatContactListComponent {
   public friendSearch: string;
   public activeFriendId = 0;
+
+  @Output() activeFriendChange = new EventEmitter<Friend>();
 
   friends: Friend[];
   friendRequests: FriendRequest[];
@@ -76,7 +80,8 @@ export class ChatContactListComponent {
 
   selectUserForChatting(friend: Friend) {
     this.activeFriendId = friend.id;
+    this.activeFriendChange.emit(friend);
   }
-  
+
   rejectFriend(friendRequest: FriendRequest) {}
 }
