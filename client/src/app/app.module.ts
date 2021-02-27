@@ -21,7 +21,7 @@ import {
   NbIconModule,
   NbChatModule,
 } from '@nebular/theme';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { FullScreenLayoutComponent } from './full-screen-layout/full-screen-layout.component';
 import { EqualValidator } from './validators/equal-validator';
@@ -64,7 +64,8 @@ const validators = [EqualValidator, PasswordStrengthValidator];
     NbSpinnerModule,
     NbButtonModule,
     FormsModule,
-    NbChatModule
+    NbChatModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

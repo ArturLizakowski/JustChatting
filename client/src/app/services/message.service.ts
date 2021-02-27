@@ -5,6 +5,7 @@ import { AddMessageDto } from '../models/add-message-dto';
 import { Message } from '../models/message';
 import { UserService } from '../services/user.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,10 +15,10 @@ export class MessageService {
   constructor(private httpClient: HttpClient) { }
 
   public getRecentMessages(): Observable<Message[]> {
-    return this.httpClient.get<Message[]>('/message/getrecent')
+    return this.httpClient.get<Message[]>('/models/getrecent')
   }
 
   public add(message: AddMessageDto): Observable<void> {
-    return this.httpClient.post<void>('/message/AddNewMessage', message);
+    return this.httpClient.post<void>('/message/AddMessage', message);
   }
 }

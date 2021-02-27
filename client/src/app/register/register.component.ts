@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import { UserRegister } from 'src/app/models/user-register';
@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
     password: 'Test1234',
     repeatPassword: 'Test1234',
   };
+  registerFrom: FormGroup;
 
   constructor(
     private notificationService: NbToastrService,
@@ -28,8 +29,18 @@ export class RegisterComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.initializeFrom
+  }
+  
+  initializeFrom(){
+    this.registerFrom = new FormGroup({
+      email: new FormControl(),
+      displayName: new FormControl(),
+      password: new FormControl(),
+      repeatPassword: new FormControl()
+    })
+  }
   register() {
     this.working = true;
     this.userService.register(this.model).subscribe(

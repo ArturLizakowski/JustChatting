@@ -1,19 +1,13 @@
-<<<<<<< HEAD
 import { Message } from '../models/message';
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbToastrService, NbChatModule} from '@nebular/theme';
 import { ok } from 'assert';
 import { AddMessageDto } from '../models/add-message-dto';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
-
-
-=======
 import { Component, Input, OnInit } from '@angular/core';
 import { NbToastrService, NbChatModule } from '@nebular/theme';
 import { Friend } from '../models/friend-request';
->>>>>>> 91ec6fdf919281781614d5b704b3d19ccd52e489
+
 
 @Component({
   selector: 'app-chat-messenger',
@@ -33,17 +27,22 @@ import { Friend } from '../models/friend-request';
   ],
 })
 export class ChatMessengerComponent implements OnInit {
+  
+  public messages: Message[];
   public friend: Friend;
 
-<<<<<<< HEAD
   model: AddMessageDto = {
     content: ""
   };
 
-  public messages: Message[];
+  @Input() public set friendInput(v: Friend) {
+    this.friend = v;
+    //// TUTAJ MOŻESZ OBSŁUŻYĆ ZAŁADOWANIE WIADOMOŚCI JAK INNY PRZYJACIEL ZOSTANIE WYBRANY
+  }
+
 
   constructor(
-    private messageService: MessageService,
+    public messageService: MessageService,
     private router: Router,
     public userService: UserService,
     private notification: NbToastrService
@@ -59,10 +58,10 @@ export class ChatMessengerComponent implements OnInit {
         this.getRecentMessages();
         this.messageService.getRecentMessages();
         this.model.content = "";
-        this.notification.success("Wiadomość dodana poprawnie!");
+        this.notification.success("Sended");
       },
       error => {
-        this.notification.danger("Coś poszło nie tak");
+        this.notification.danger("Something wrong");
       }
     );
   }
@@ -75,14 +74,5 @@ export class ChatMessengerComponent implements OnInit {
       error => {}
     );
   }
-=======
-  @Input() public set friendInput(v: Friend) {
-    this.friend = v;
-    //// TUTAJ MOŻESZ OBSŁUŻYĆ ZAŁADOWANIE WIADOMOŚCI JAK INNY PRZYJACIEL ZOSTANIE WYBRANY
-  }
 
-  constructor() {}
-
-  ngOnInit(): void {}
->>>>>>> 91ec6fdf919281781614d5b704b3d19ccd52e489
 }
