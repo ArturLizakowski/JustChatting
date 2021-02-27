@@ -19,6 +19,7 @@ import {
   NbListModule,
   NbUserModule,
   NbIconModule,
+  NbChatModule,
 } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
@@ -28,6 +29,7 @@ import { PasswordStrengthValidator } from './validators/password-strength-valida
 import { ChatContactListComponent } from './chat-contact-list/chat-contact-list.component';
 import { TokenInterceptor } from './interceptors/token-interceptor';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ChatMessengerComponent } from './chat-messenger/chat-messenger.component';
 
 const components = [
   AppComponent,
@@ -36,6 +38,7 @@ const components = [
   LoginComponent,
   RegisterComponent,
   FullScreenLayoutComponent,
+  ChatMessengerComponent
 ];
 
 const validators = [EqualValidator, PasswordStrengthValidator];
@@ -61,6 +64,7 @@ const validators = [EqualValidator, PasswordStrengthValidator];
     NbSpinnerModule,
     NbButtonModule,
     FormsModule,
+    NbChatModule
   ],
   providers: [
     {
