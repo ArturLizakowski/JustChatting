@@ -66,6 +66,7 @@ const validators = [EqualValidator, PasswordStrengthValidator];
     FormsModule,
     NbChatModule,
     ReactiveFormsModule
+
   ],
   providers: [
     {

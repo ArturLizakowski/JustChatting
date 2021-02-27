@@ -15,10 +15,12 @@ export class MessageService {
   constructor(private httpClient: HttpClient) { }
 
   public getRecentMessages(): Observable<Message[]> {
+
     return this.httpClient.get<Message[]>('/models/getrecent')
   }
 
   public add(message: AddMessageDto): Observable<void> {
     return this.httpClient.post<void>('/message/AddMessage', message);
+
   }
 }
