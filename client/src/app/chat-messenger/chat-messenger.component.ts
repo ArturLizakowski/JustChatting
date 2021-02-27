@@ -1,5 +1,12 @@
+import { Message } from '../models/message';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbToastrService, NbChatModule} from '@nebular/theme';
+import { ok } from 'assert';
+import { AddMessageDto } from '../models/add-message-dto';
+import { MessageService } from '../services/message.service';
+import { UserService } from '../services/user.service';
+
 
 
 @Component({
@@ -20,9 +27,43 @@ import { NbToastrService, NbChatModule} from '@nebular/theme';
 
 export class ChatMessengerComponent implements OnInit {
 
-  constructor() { }
+  model: AddMessageDto = {
+    content: ""
+  };
 
-  ngOnInit(): void {
+  public messages: Message[];
+
+  constructor(
+    private messageService: MessageService,
+    private router: Router,
+    public userService: UserService,
+    private notification: NbToastrService
+  ) {}
+
+  ngOnInit() {
+    this.getRecentMessages();
   }
 
+  add() {
+    this.messageService.add(this.model).subscribe(
+      () => {
+        this.getRecentMessages();
+        this.messageService.getRecentMessages();
+        this.model.content = "";
+        this.notification.success("Wiadomość dodana poprawnie!");
+      },
+      error => {
+        this.notification.danger("Coś poszło nie tak");
+      }
+    );
+  }
+  
+  getRecentMessages() {
+    this.messageService.getRecentMessages().subscribe(
+      toCoZwraca => {
+        this.messages = toCoZwraca;
+      },
+      error => {}
+    );
+  }
 }
