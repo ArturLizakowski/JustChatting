@@ -5,6 +5,16 @@ namespace API.Entities
 {
 	public class FriendRequest
 	{
+		public FriendRequest()
+		{
+		}
+
+		public FriendRequest(int requestorId, int friendId)
+		{
+			this.RequestorId = requestorId;
+			this.FriendId = friendId;
+		}
+
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }

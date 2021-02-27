@@ -1,63 +1,82 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Friend, FriendRequest } from '../models/friend-request';
 import { UserSearch } from '../models/user-search';
 import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-chat-contact-list',
   templateUrl: './chat-contact-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./chat-contact-list.component.scss'],
 })
 export class ChatContactListComponent {
   public friendSearch: string;
-  options: string[];
-  filteredOptions$: Observable<string[]>;
+  public activeFriendId = 0;
 
-  @ViewChild('autoInput') input;
+  friends: Friend[];
+  friendRequests: FriendRequest[];
+  userSearch$: BehaviorSubject<UserSearch[]> = new BehaviorSubject<
+    UserSearch[]
+  >([]);
 
   constructor(public userService: UserService) {}
 
-  userSearch$: Observable<UserSearch[]>;
-
   ngOnInit() {
-    this.options = ['Option 1', 'Option 2', 'Option 3'];
-    this.filteredOptions$ = of(this.options);
-    this.userSearch$ = of([]);
+    this.refreshFriends();
+    this.refreshFriendsRequests();
+  }
+
+  refreshFriendsRequests() {
+    this.userService.getFriendRequests().subscribe((x) => {
+      this.friendRequests = x;
+    });
+  }
+
+  refreshFriends() {
+    this.userService.getFriends().subscribe((x) => {
+      this.friends = x;
+    });
   }
 
   onChange() {
     if (!this.friendSearch) {
-      this.userSearch$ = of([]);
+      this.userSearch$.next([]);
       return;
     }
 
-    this.userSearch$ = this.userService.findUsers(this.friendSearch);
+    this.userService.findUsers(this.friendSearch).subscribe((x) => {
+      this.userSearch$.next(x);
+    });
   }
 
-  onSelectionChange($event) {
-    console.log($event);
-    //this.filteredOptions$ = this.getFilteredOptions($event);
+  onSelectionChange($event: UserSearch) {
+    this.friendSearch = '';
+    if (!$event.id) {
+      return;
+    }
+
+    this.userService.requestFriend($event.id).subscribe((x) => {
+      this.refreshFriendsRequests();
+    });
   }
 
-  private filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
+  approveFriend(friendRequest: FriendRequest) {
+    this.userService
+      .approveFriendRequest(friendRequest.requestId)
+      .subscribe((x) => {
+        this.refreshFriends();
+        this.refreshFriendsRequests();
+      });
   }
 
-  getFilteredOptions(value: string): Observable<string[]> {
-    return of(value).pipe(
-      delay(20),
-      map(filterString => this.filter(filterString)),
-    );
+  selectUserForChatting(friend: Friend) {
+    this.activeFriendId = friend.id;
   }
-
-  onChange2() {
-    this.filteredOptions$ = this.getFilteredOptions(this.input.nativeElement.value);
-  }
-
-  onSelectionChange2($event) {
-    this.filteredOptions$ = this.getFilteredOptions($event);
-  }
+  
+  rejectFriend(friendRequest: FriendRequest) {}
 }

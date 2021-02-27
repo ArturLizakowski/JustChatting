@@ -1,4 +1,4 @@
 namespace API.DTO
 {
-	public record UserSearchResultDto(int Id, string DisplayName, bool alreadyFriend, bool alreadyRequestedFriend);
+	public record UserSearchResultDto(int Id, string DisplayName, bool AlreadyFriend, bool AlreadyRequestedFriend);
 }

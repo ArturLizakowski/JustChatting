@@ -1,4 +1,4 @@
-<!-- <input
+<input
   nbInput
   type="text"
   [(ngModel)]="friendSearch"
@@ -8,28 +8,57 @@
 />
 
 <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
-  <nb-option
-    *ngFor="let option of userSearch$ | async"
-    [value]="option.displayName"
-  >
-    {{ option.displayName }}
-  </nb-option>
-</nb-autocomplete> -->
-
-<input
-  #autoInput
-  nbInput
-  type="text"
-  (input)="onChange2()"
-  placeholder="Enter value"
-  [nbAutocomplete]="auto2"
-/>
-
-<nb-autocomplete #auto2 [activeFirst]="true" (selectedChange)="onSelectionChange2($event)">
-  <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
-    {{ option }}
+  <nb-option *ngFor="let option of userSearch$ | async" [value]="option">
+    <div>
+      <div class="search-name">{{ option.displayName }}</div>
+      <div class="search-action" *ngIf="option.alreadyFriend">
+        Already on your friend list
+      </div>
+      <div class="search-action" *ngIf="option.alreadyRequestedFriend">
+        Already requested as friend
+      </div>
+      <div
+        class="search-action"
+        *ngIf="!option.alreadyFriend && !option.alreadyRequestedFriend"
+      >
+        Send request to connect
+      </div>
+    </div>
   </nb-option>
 </nb-autocomplete>
 
-<label>Friends</label>
-<div>You don't have any friends yet :(</div>
+<label *ngIf="friends?.length > 0">Friends</label>
+<nb-list>
+  <nb-list-item *ngFor="let friend of friends" (click)="selectUserForChatting(friend)" [ngClass]="{'selected': friend.id === activeFriendId}">
+    <div>
+      <nb-user
+        [name]="friend.displayName"
+        [title]="'Active'"
+      >
+      </nb-user>      
+    </div>
+  </nb-list-item>
+</nb-list>
+
+<label *ngIf="friendRequests?.length > 0">Friends requests</label>
+<nb-list>
+  <nb-list-item *ngFor="let friend of friendRequests">
+    <div>
+      <nb-user
+        [name]="friend.displayName"
+        [title]="
+          friend.canApprove ? '' : 'User still did not accepted invitation'
+        "
+      >
+      </nb-user>
+      <div *ngIf="friend.canApprove" style="text-align: center;">
+        <button nbButton status="danger" (click)="rejectFriend(friend)" shape="round">
+          <nb-icon icon="person-delete-outline"></nb-icon>
+        </button>
+        <button style="margin-left: 10px" (click)="approveFriend(friend)" nbButton status="success" shape="round">
+          <nb-icon icon="person-add-outline"></nb-icon>
+        </button>
+      </div>
+    </div>
+  </nb-list-item>
+</nb-list>

@@ -16,6 +16,9 @@ import {
   NbSpinnerModule,
   NbToastrModule,
   NbAutocompleteModule,
+  NbListModule,
+  NbUserModule,
+  NbIconModule,
 } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
@@ -24,6 +27,7 @@ import { EqualValidator } from './validators/equal-validator';
 import { PasswordStrengthValidator } from './validators/password-strength-validator';
 import { ChatContactListComponent } from './chat-contact-list/chat-contact-list.component';
 import { TokenInterceptor } from './interceptors/token-interceptor';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 const components = [
   AppComponent,
@@ -48,7 +52,11 @@ const validators = [EqualValidator, PasswordStrengthValidator];
     NbToastrModule.forRoot(),
     NbLayoutModule,
     NbAutocompleteModule,
+    NbListModule,
     NbCardModule,
+    NbEvaIconsModule,
+    NbIconModule,
+    NbUserModule,
     NbInputModule,
     NbSpinnerModule,
     NbButtonModule,
