@@ -1,4 +1,4 @@
-<div class="login-form"> 
+<div *ngIf="!registerMode" class="login-form"> 
   <nav class="navbar navbar-light bg-light justify-content-between" *ngIf="(userService.currentUser$| async)">
     <form class="form-inline">
       <div class="tr">
@@ -29,9 +29,16 @@
           type="password" nbInput fullWidth placeholder="Password" />
         <div class="tr">
           <button class="tr-center" nbButton status="primary" shape="round">Login</button>
-          <button class="tr-center" nbButton status="primary" shape="round">Register</button>
+          <button (click)="registerToggle()" class="tr-center" nbButton status="primary" shape="round">Register</button>
         </div>
       </form>
     </nb-card-body>
   </nb-card>
+</div>
+<div *ngIf="registerMode" class="container">
+  <div class="register-form">
+    <div class="tc">
+      <app-register></app-register>
+    </div>
+  </div>
 </div>

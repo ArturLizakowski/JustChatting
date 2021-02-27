@@ -12,6 +12,8 @@ import { User } from '../models/user';
 })
 export class LoginComponent implements OnInit {
 
+  registerMode = false;
+
   model: any = {}
   loggedIn: boolean;
   standardLoginIsWorking = false;
@@ -34,6 +36,9 @@ export class LoginComponent implements OnInit {
   logout() {
     this.userService.logout();
   }
-    
+  
+  registerToggle() {
+    this.registerMode = !this.registerMode;
+  }
   
 }
