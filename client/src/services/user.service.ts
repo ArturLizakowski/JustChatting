@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { ReplaySubject } from "rxjs";
 import { map } from 'rxjs/operators';
 import { User } from "src/app/models/user";
+import { UserLogin } from "src/models/user-login";
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  login(model: any) {
+  login(model: UserLogin) {
     return this.httpClient.post(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;

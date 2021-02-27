@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { UserLogin } from 'src/models/user-login';
 import { UserService } from 'src/services/user.service';
 import { User } from '../models/user';
 
@@ -14,7 +15,11 @@ export class LoginComponent implements OnInit {
 
   registerMode = false;
 
-  model: any = {}
+  model: UserLogin = {
+    userName: '',
+    password: '',
+  };
+  
   loggedIn: boolean;
   standardLoginIsWorking = false;
   formWasValidated = false;
@@ -31,14 +36,5 @@ export class LoginComponent implements OnInit {
       console.log(error);
     })
     //console.log(this.model)
-  }
-
-  logout() {
-    this.userService.logout();
-  }
-  
-  registerToggle() {
-    this.registerMode = !this.registerMode;
-  }
-  
+  }  
 }

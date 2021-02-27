@@ -1,25 +1,65 @@
-<div class="register-form"> 
-  <nb-card>
+<div class="login-form">
+  <div class="logo-wrapper tc">
+    <img src="/assets/logo_with_text.png" />
+  </div>
+  <nb-card [nbSpinner]="working">
     <nb-card-body class="example-items-rows">
-      <div class="logo-wrapper tc">
-        <img src="/assets/logo_with_text.png" />
-      </div>
-      <form #registerform="ngForm" (ngSubmit)="register()" class="example-form"  autocomplete="off">
+      <form
+        #form="ngForm"
+        class="example-form"
+        (ngSubmit)="register()"
+        autocomplete="off"        
+      >
         <div class="tc"></div>
-        <h1>Sign up!</h1>
-        <div class="description">Nie zwlekaj. Dołącz do społeczności JustChatting!</div>
-        <input 
-            name="username"
-            [(ngModel)]="model.username"
-            type="username" nbInput fullWidth placeholder="Email" />
+        <h1>Register</h1>
+        <div class="description">
+          Just chatting makes it easy and fun to stay close to your favorite
+          people.
+        </div>
 
-        <input 
-            name="password"
-            [(ngModel)]="model.password"
-            type="password" nbInput fullWidth placeholder="Password" />
-        <div class="tr">
-          <button class="tr-center" nbButton status="primary" shape="round" type="submit">Register</button>
-          <button class="tr-center" nbButton status="primary" shape="round" (click)="cancel()" type="button">Cancel</button>
+        <input
+          name="username"
+          [(ngModel)]="model.email"
+          required
+          type="email"
+          nbInput
+          fullWidth
+          placeholder="Email"
+        />
+
+        <input
+          name="nick"
+          [(ngModel)]="model.nick"
+          required
+          type="text"
+          nbInput
+          fullWidth
+          placeholder="Nickname"
+        />
+
+        <input
+          name="password"
+          [(ngModel)]="model.password"
+          required
+          type="password"
+          nbInput
+          fullWidth
+          placeholder="Password"
+        />
+
+        <input
+          name="password"
+          [(ngModel)]="model.password"
+          required
+          type="password"
+          nbInput
+          fullWidth
+          placeholder="Repeat password"
+        />
+
+        <div class="buttons">
+          <a [routerLink]="['/']">Already have an account?</a>
+          <button nbButton status="primary" shape="round">Register</button>
         </div>
       </form>
     </nb-card-body>

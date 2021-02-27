@@ -1,35 +1,30 @@
-<div *ngIf="!registerMode" class="login-form"> 
-  <nav class="navbar navbar-light bg-light justify-content-between" *ngIf="(userService.currentUser$| async)">
-    <form class="form-inline">
-      <div class="tr">
-        <button nbButton status="primary" shape="round" (click)="logout()">Logout</button>
-      </div>
-    </form>
-  </nav>
+<div class="login-form"> 
+  <div class="logo-wrapper tc">
+    <img src="/assets/logo_with_text.png" />
+  </div>
+
   <nb-card>
     <nb-card-body class="example-items-rows">
-      <div class="logo-wrapper tc">
-        <img src="/assets/logo_with_text.png" />
-      </div>
+      
       <form *ngIf="(userService.currentUser$| async) === null" #loginform="ngForm" class="example-form" (ngSubmit)="login()" autocomplete="off">
         <div class="tc"></div>
         <h1>Login</h1>
-        <div class="description">Zawsze i wszędzie
-          utrzymuj kontakt ze znajomymi
-          Just Chatting sprawia, że utrzymywanie bliskiego kontaktu z ludźmi, których najbardziej lubisz, jest łatwe i przyjemne.</div>
+        <div class="description">Just chatting makes it easy and fun to stay close to your favorite people.</div>
 
         <input 
             name="username"
-            [(ngModel)]="model.username"
+            [(ngModel)]="model.userName"
+            required
             type="username" nbInput fullWidth placeholder="Email" />
 
         <input 
             name="password"
             [(ngModel)]="model.password"
-          type="password" nbInput fullWidth placeholder="Password" />
-        <div class="tr">
-          <button class="tr-center" nbButton status="primary" shape="round">Login</button>
-          <button (click)="registerToggle()" class="tr-center" nbButton status="primary" shape="round">Register</button>
+            required
+            type="password" nbInput fullWidth placeholder="Password" />
+        <div class="buttons">
+          <a [routerLink]="[ '/register']">Dont have an account yet?</a>
+          <button nbButton status="primary" shape="round">Login</button>
         </div>
       </form>
     </nb-card-body>

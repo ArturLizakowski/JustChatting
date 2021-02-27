@@ -6,12 +6,25 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatHostComponent } from './chat-host/chat-host.component';
 import { LoginComponent } from './login/login.component';
-import { NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbThemeModule, NbSidebarModule } from '@nebular/theme';
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbThemeModule,
+  NbSidebarModule,
+  NbSpinnerModule,
+} from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, ChatHostComponent, LoginComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    ChatHostComponent,
+    LoginComponent,
+    RegisterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,8 +35,9 @@ import { RegisterComponent } from './register/register.component';
     NbLayoutModule,
     NbCardModule,
     NbInputModule,
+    NbSpinnerModule,
     NbButtonModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
