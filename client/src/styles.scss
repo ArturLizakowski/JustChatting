@@ -38,14 +38,14 @@ mat-form-field {
 
 .form-group {
   margin-bottom: 0.5rem;
+}
 
-  label {
-    font-size: 0.7rem;
-    color: nb-theme(color-info-700);
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-  }
+label {
+  font-size: 0.7rem;
+  color: nb-theme(color-info-700);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .flex-justify {

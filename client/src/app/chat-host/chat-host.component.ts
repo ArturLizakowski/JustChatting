@@ -4,11 +4,8 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-chat-host',
   templateUrl: './chat-host.component.html',
-  styleUrls: ['./chat-host.component.scss']
+  styleUrls: ['./chat-host.component.scss'],
 })
-export class ChatHostComponent {
-
-  constructor(public userService: UserService) { }
-  
-
+export class ChatHostComponent {  
+  constructor(public userService: UserService) {}
 }

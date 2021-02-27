@@ -1,0 +1,35 @@
+<!-- <input
+  nbInput
+  type="text"
+  [(ngModel)]="friendSearch"
+  (ngModelChange)="onChange()"
+  placeholder="Search for friends"
+  [nbAutocomplete]="auto"
+/>
+
+<nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+  <nb-option
+    *ngFor="let option of userSearch$ | async"
+    [value]="option.displayName"
+  >
+    {{ option.displayName }}
+  </nb-option>
+</nb-autocomplete> -->
+
+<input
+  #autoInput
+  nbInput
+  type="text"
+  (input)="onChange2()"
+  placeholder="Enter value"
+  [nbAutocomplete]="auto2"
+/>
+
+<nb-autocomplete #auto2 [activeFirst]="true" (selectedChange)="onSelectionChange2($event)">
+  <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+    {{ option }}
+  </nb-option>
+</nb-autocomplete>
+
+<label>Friends</label>
+<div>You don't have any friends yet :(</div>
