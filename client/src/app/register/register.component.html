@@ -1,0 +1,27 @@
+<div class="register-form"> 
+  <nb-card>
+    <nb-card-body class="example-items-rows">
+      <div class="logo-wrapper tc">
+        <img src="/assets/logo_with_text.png" />
+      </div>
+      <form #registerform="ngForm" (ngSubmit)="register()" class="example-form"  autocomplete="off">
+        <div class="tc"></div>
+        <h1>Sign up!</h1>
+        <div class="description">Nie zwlekaj. Dołącz do społeczności JustChatting!</div>
+        <input 
+            name="username"
+            [(ngModel)]="model.username"
+            type="username" nbInput fullWidth placeholder="Email" />
+
+        <input 
+            name="password"
+            [(ngModel)]="model.password"
+            type="password" nbInput fullWidth placeholder="Password" />
+        <div class="tr">
+          <button class="tr-center" nbButton status="primary" shape="round" type="submit">Register</button>
+          <button class="tr-center" nbButton status="primary" shape="round" (click)="cancel()" type="button">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

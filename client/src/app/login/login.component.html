@@ -1,23 +1,44 @@
-<div class="login-form">  
+<div *ngIf="!registerMode" class="login-form"> 
+  <nav class="navbar navbar-light bg-light justify-content-between" *ngIf="(userService.currentUser$| async)">
+    <form class="form-inline">
+      <div class="tr">
+        <button nbButton status="primary" shape="round" (click)="logout()">Logout</button>
+      </div>
+    </form>
+  </nav>
   <nb-card>
     <nb-card-body class="example-items-rows">
       <div class="logo-wrapper tc">
         <img src="/assets/logo_with_text.png" />
       </div>
-      <form class="example-form">
+      <form *ngIf="(userService.currentUser$| async) === null" #loginform="ngForm" class="example-form" (ngSubmit)="login()" autocomplete="off">
         <div class="tc"></div>
         <h1>Login</h1>
         <div class="description">Zawsze i wszędzie
           utrzymuj kontakt ze znajomymi
           Just Chatting sprawia, że utrzymywanie bliskiego kontaktu z ludźmi, których najbardziej lubisz, jest łatwe i przyjemne.</div>
 
-        <input type="text" nbInput fullWidth placeholder="Email" />
+        <input 
+            name="username"
+            [(ngModel)]="model.username"
+            type="username" nbInput fullWidth placeholder="Email" />
 
-        <input type="password" nbInput fullWidth placeholder="Password" />
+        <input 
+            name="password"
+            [(ngModel)]="model.password"
+          type="password" nbInput fullWidth placeholder="Password" />
         <div class="tr">
-          <button nbButton status="primary" shape="round">Login</button>
+          <button class="tr-center" nbButton status="primary" shape="round">Login</button>
+          <button (click)="registerToggle()" class="tr-center" nbButton status="primary" shape="round">Register</button>
         </div>
       </form>
     </nb-card-body>
   </nb-card>
+</div>
+<div *ngIf="registerMode" class="container">
+  <div class="register-form">
+    <div class="tc">
+      <app-register></app-register>
+    </div>
+  </div>
 </div>
