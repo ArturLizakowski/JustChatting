@@ -8,6 +8,6 @@
     [title]="friend.displayName" 
     size="large">
     </nb-chat-message>
-    <nb-chat-form (send)="add()">
+    <nb-chat-form *ngIf="friend" (send)="add()">
     </nb-chat-form>
 </nb-chat>

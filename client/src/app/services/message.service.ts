@@ -16,7 +16,7 @@ export class MessageService {
 
   public getRecentMessages(): Observable<Message[]> {
 
-    return this.httpClient.get<Message[]>('/models/getrecent')
+    return this.httpClient.get<Message[]>('/message/getrecent')
   }
 
   public add(message: AddMessageDto): Observable<void> {
@@ -24,3 +24,4 @@ export class MessageService {
 
   }
 }
+
