@@ -4,6 +4,7 @@
     *ngFor="let message of messages"
     [title]="friend.displayName"
     [message]="message.content"
+    [date]="message.modifyDate"
     [reply]="message.fromMe === false"
     [sender]="message.fromMe ? 'Me' : friend.displayName"
     size="large"
