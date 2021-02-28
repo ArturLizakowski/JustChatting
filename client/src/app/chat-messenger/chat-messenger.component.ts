@@ -54,7 +54,7 @@ export class ChatMessengerComponent implements OnInit {
   }
 
   add() {
-    this.messageService.add(this.model).subscribe(
+    this.messageService.addMessage(this.model).subscribe(
       () => {
         this.getRecentMessages();
         this.messageService.getRecentMessages();

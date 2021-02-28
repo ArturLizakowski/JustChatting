@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers
 {
   [ApiController]
+  //[Route("[controler]/[action]")]
   [Route("api/messages")]
   [Authorize]
     public class MessagesController : BaseApiController
@@ -26,11 +27,11 @@ namespace API.Controllers
     [HttpPost]
     [Route("AddMessage")]
     //[Route("[controller]/[action]")]
-    public async Task<IActionResult> AddMessage ([FromBody] AddMessageDto messageDto)
+    public async Task<IActionResult> AddMessage (AddMessageDto messageDto)
     {
       var message = new Message();
       message.Modify = DateTime.Now;
-      message.Content = messageDto.Content;
+      message.Content = message.Content;
       message.AuthorId = this.User.GetUserId();
       this._context.Messages.Add(message);
       await this._context.SaveChangesAsync();
@@ -38,7 +39,8 @@ namespace API.Controllers
     }
 
     [HttpGet]
-    //[Route("GetRecent")]
+    //[Route("[controler]/[action]")]
+    //[Route("GetRecentMessages")]
     public async Task<IActionResult> GetRecentMessages(int userId)
     {
       var currentUserId = this.User.GetUserId();
