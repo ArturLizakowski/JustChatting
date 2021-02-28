@@ -45,7 +45,7 @@ namespace API.Controllers
 		}
 
 		[HttpGet]
-		//[Route("GetRecent")]
+		[Route("GetRecentMessages/{userId}")]
 		public async Task<IActionResult> GetRecentMessages(int userId)
 		{
 			var currentUserId = this.User.GetUserId();
@@ -55,7 +55,7 @@ namespace API.Controllers
 			var messageDtos = messages
 			.Select(message =>
 			{
-				return new MessageDto(message.Content, message.Modify);
+				return new MessageDto(message.Content, message.AuthorId == currentUserId, message.Modify);
 			}).OrderByDescending(x => x.ModifyDate);
 
 			return Ok(messageDtos);

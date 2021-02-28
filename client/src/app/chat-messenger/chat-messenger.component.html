@@ -3,6 +3,7 @@
   <nb-chat-message
     *ngFor="let massage of messages"
     [title]="friend.displayName"
+    [message]=[massage.content]
     size="large"
   >
   </nb-chat-message>

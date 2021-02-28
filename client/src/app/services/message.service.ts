@@ -14,9 +14,9 @@ export class MessageService {
 
   constructor(private httpClient: HttpClient, public userService: UserService) { }
 
-  public getRecentMessages(): Observable<Message[]> {
+  public getRecentMessages(friendId: number): Observable<Message[]> {
 
-    return this.httpClient.get<Message[]>('/messages/getrecent');
+    return this.httpClient.get<Message[]>(`/messages/GetRecentMessages/${friendId}`);
   }
 
   public add(message: AddMessageDto): Observable<void> {

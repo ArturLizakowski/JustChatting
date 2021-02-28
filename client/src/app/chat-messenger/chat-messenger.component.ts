@@ -31,7 +31,7 @@ export class ChatMessengerComponent implements OnInit {
 
   @Input() public set friendInput(v: Friend) {
     this.friend = v;
-    //// TUTAJ MOŻESZ OBSŁUŻYĆ ZAŁADOWANIE WIADOMOŚCI JAK INNY PRZYJACIEL ZOSTANIE WYBRANY
+    this.getRecentMessages();
   }
 
   constructor(
@@ -52,7 +52,6 @@ export class ChatMessengerComponent implements OnInit {
       .subscribe(
         () => {
           this.getRecentMessages();
-          this.messageService.getRecentMessages();
           this.notification.success('Sended');
         },
         (error) => {
@@ -62,7 +61,7 @@ export class ChatMessengerComponent implements OnInit {
   }
 
   getRecentMessages() {
-    this.messageService.getRecentMessages().subscribe(
+    this.messageService.getRecentMessages(this.friend.id).subscribe(
       (currentMessage) => {
         this.messages = currentMessage;
       },
