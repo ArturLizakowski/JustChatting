@@ -27,7 +27,7 @@ namespace API.Controllers
     [HttpPost]
     [Route("AddMessage")]
     //[Route("[controller]/[action]")]
-    public async Task<IActionResult> AddMessage (AddMessageDto messageDto)
+    public async Task<IActionResult> AddMessage ([FromBody] AddMessageDto messageDto)
     {
       var message = new Message();
       message.Modify = DateTime.Now;
