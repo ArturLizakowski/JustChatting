@@ -5,24 +5,26 @@ using API.Data;
 using API.DTO;
 using API.Entities;
 using API.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
-
+  [ApiController]
+  //[Route("[controller]/[action]")]
   [Authorize]
-	public class PostsController : BaseApiController
-	{
-	/*	private readonly DataContext _context;
+    public class MessagesController : BaseApiController
+    {
+		private readonly DataContext _context;
 
-		public PostsController(DataContext context)
+		public MessagesController(DataContext context)
 		{
 			_context = context;
 		}
 
     [HttpPost("message")]
+    //[Route("[controller]/[action]")]
     public async Task<IActionResult> AddMessageDto ([FromBody] AddMessageDto messageDto)
     {
       var message = new Message();
@@ -47,6 +49,6 @@ namespace API.Controllers
       }).OrderByDescending(x => x.ModifyDate);
 
       return Ok(messageDtos);
-    }*/
+    }
 	}
 }

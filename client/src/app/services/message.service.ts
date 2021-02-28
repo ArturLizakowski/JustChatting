@@ -12,16 +12,16 @@ import { UserService } from '../services/user.service';
 export class MessageService {
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, public userService: UserService) { }
 
   public getRecentMessages(): Observable<Message[]> {
 
-    return this.httpClient.get<Message[]>('/message/getrecent')
+    return this.httpClient.get<Message[]>(`/messages/getrecent`)
   }
 
   public add(message: AddMessageDto): Observable<void> {
-    return this.httpClient.post<void>('/message/AddMessage', message);
-
+    return this.httpClient.post<void>(`/messages/Message`, message);
+ 
   }
 }
 

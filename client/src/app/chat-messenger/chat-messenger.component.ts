@@ -32,7 +32,8 @@ export class ChatMessengerComponent implements OnInit {
   public friend: Friend;
 
   model: AddMessageDto = {
-    content: ""
+    content: " ",
+    modify: " "
   };
 
   @Input() public set friendInput(v: Friend) {
@@ -57,7 +58,7 @@ export class ChatMessengerComponent implements OnInit {
       () => {
         this.getRecentMessages();
         this.messageService.getRecentMessages();
-        this.model.content = "";
+        this.model.content = ("Message[]");
         this.notification.success("Sended");
       },
       error => {
@@ -68,8 +69,8 @@ export class ChatMessengerComponent implements OnInit {
   
   getRecentMessages() {
     this.messageService.getRecentMessages().subscribe(
-      toCoZwraca => {
-        this.messages = toCoZwraca;
+      message => {
+        this.messages = message;
       },
       error => {}
     );
