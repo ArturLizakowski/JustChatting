@@ -30,6 +30,8 @@ import { ChatContactListComponent } from './chat-contact-list/chat-contact-list.
 import { TokenInterceptor } from './interceptors/token-interceptor';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChatMessengerComponent } from './chat-messenger/chat-messenger.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const components = [
   AppComponent,
@@ -65,7 +67,8 @@ const validators = [EqualValidator, PasswordStrengthValidator];
     NbButtonModule,
     FormsModule,
     NbChatModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
   providers: [
