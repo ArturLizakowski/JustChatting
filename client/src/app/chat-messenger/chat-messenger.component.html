@@ -1,13 +1,10 @@
-<nb-chat [title]="friend.displayName" size="large">
-  <div *ngIf="!friend">
-    No conversation selected.
-  </div>
-    <nb-chat-message 
+<nb-chat *ngIf="friend" [title]="friend?.displayName" size="large">
+  <div *ngIf="!friend">No conversation selected.</div>
+  <nb-chat-message
     *ngFor="let massage of messages"
-    [(ngModel)]="model.content" 
-    [title]="friend.displayName" 
-    size="large">
-    </nb-chat-message>
-    <nb-chat-form *ngIf="friend" (send)="add()">
-    </nb-chat-form>
+    [title]="friend.displayName"
+    size="large"
+  >
+  </nb-chat-message>
+  <nb-chat-form *ngIf="friend" (send)="add($event)"> </nb-chat-form>
 </nb-chat>

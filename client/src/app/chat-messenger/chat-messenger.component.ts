@@ -8,7 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NbToastrService, NbChatModule } from '@nebular/theme';
 import { Friend } from '../models/friend-request';
 
-
 @Component({
   selector: 'app-chat-messenger',
   templateUrl: './chat-messenger.component.html',
@@ -20,27 +19,20 @@ import { Friend } from '../models/friend-request';
         display: flex;
       }
       nb-chat {
-        width: 1650px;
+        width: 1350px;
         height: 1000px;
       }
     `,
   ],
 })
 export class ChatMessengerComponent implements OnInit {
-  
-  model: AddMessageDto = {
-    content:" "
-  };
-
   public messages: Message[];
   public friend: Friend;
-
 
   @Input() public set friendInput(v: Friend) {
     this.friend = v;
     //// TUTAJ MOŻESZ OBSŁUŻYĆ ZAŁADOWANIE WIADOMOŚCI JAK INNY PRZYJACIEL ZOSTANIE WYBRANY
   }
-
 
   constructor(
     public messageService: MessageService,
@@ -53,27 +45,28 @@ export class ChatMessengerComponent implements OnInit {
     this.getRecentMessages();
   }
 
-  add() {
-    this.messageService.add(this.model).subscribe(
-      () => {
-        this.getRecentMessages();
-        this.messageService.getRecentMessages();
-        this.model.content = "";
-        this.notification.success("Sended");
-      },
-      error => {
-        this.notification.danger("Something wrong");
-      }
-    );
-  }
-  
-  getRecentMessages() {
-    this.messageService.getRecentMessages().subscribe(
-      currentMessage => {
-        this.messages = currentMessage;
-      },
-      error => {}
-    );
+  add($event: { message: string; files: any[] }) {
+    console.log($event);
+    this.messageService
+      .add({ content: $event.message, recipientId: this.friend.id })
+      .subscribe(
+        () => {
+          this.getRecentMessages();
+          this.messageService.getRecentMessages();
+          this.notification.success('Sended');
+        },
+        (error) => {
+          this.notification.danger('Something wrong');
+        }
+      );
   }
 
+  getRecentMessages() {
+    this.messageService.getRecentMessages().subscribe(
+      (currentMessage) => {
+        this.messages = currentMessage;
+      },
+      (error) => {}
+    );
+  }
 }
