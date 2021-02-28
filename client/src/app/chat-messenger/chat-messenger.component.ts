@@ -28,13 +28,13 @@ import { Friend } from '../models/friend-request';
 })
 export class ChatMessengerComponent implements OnInit {
   
+  model: AddMessageDto = {
+    content:" "
+  };
+
   public messages: Message[];
   public friend: Friend;
 
-  model: AddMessageDto = {
-    content: " ",
-    modify: " "
-  };
 
   @Input() public set friendInput(v: Friend) {
     this.friend = v;
@@ -58,7 +58,7 @@ export class ChatMessengerComponent implements OnInit {
       () => {
         this.getRecentMessages();
         this.messageService.getRecentMessages();
-        this.model.content = ("Message[]");
+        this.model.content = "";
         this.notification.success("Sended");
       },
       error => {
@@ -69,8 +69,8 @@ export class ChatMessengerComponent implements OnInit {
   
   getRecentMessages() {
     this.messageService.getRecentMessages().subscribe(
-      message => {
-        this.messages = message;
+      currentMessage => {
+        this.messages = currentMessage;
       },
       error => {}
     );

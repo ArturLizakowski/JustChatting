@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Friend, FriendRequest } from '../models/friend-request';
 import { UserSearch } from '../models/user-search';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-contact-list',
@@ -28,7 +29,7 @@ export class ChatContactListComponent {
     UserSearch[]
   >([]);
 
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.refreshFriends();
@@ -79,6 +80,7 @@ export class ChatContactListComponent {
   }
 
   selectUserForChatting(friend: Friend) {
+    this.router.navigateByUrl('/chatapp/messenger');
     this.activeFriendId = friend.id;
     this.activeFriendChange.emit(friend);
   }

@@ -16,11 +16,11 @@ export class MessageService {
 
   public getRecentMessages(): Observable<Message[]> {
 
-    return this.httpClient.get<Message[]>(`/messages/getrecent`)
+    return this.httpClient.get<Message[]>('/messages/getrecent');
   }
 
   public add(message: AddMessageDto): Observable<void> {
-    return this.httpClient.post<void>(`/messages/Message`, message);
+    return this.httpClient.post<void>('/messages/AddMessage', message);
  
   }
 }

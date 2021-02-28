@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from './models/user';
 import { UserService } from 'src/app/services/user.service';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class AppComponent implements OnInit {
   title = 'JustChatting';
   users: any;
+  //messages: any;
 
   constructor(private httpClient: HttpClient, private userService: UserService) {}
 
@@ -31,4 +33,12 @@ export class AppComponent implements OnInit {
       console.log(error);
     })
   }
+
+  /*getRecentMessages() {
+    this.httpClient.get('/messages').subscribe(response => {
+      this.messages = response;
+    }, error => {
+      console.log(error);
+    })
+  }*/
 }

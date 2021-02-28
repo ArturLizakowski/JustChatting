@@ -3,7 +3,7 @@
     No conversation selected.
   </div>
     <nb-chat-message 
-    *ngIf="friend" 
+    *ngFor="let massage of messages"
     [(ngModel)]="model.content" 
     [title]="friend.displayName" 
     size="large">
