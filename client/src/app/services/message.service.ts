@@ -19,8 +19,8 @@ export class MessageService {
     return this.httpClient.get<Message[]>(`/messages/GetRecentMessages/${friendId}`);
   }
 
-  public add(message: AddMessageDto): Observable<void> {
-    return this.httpClient.post<void>('/messages/AddMessage', message);
+  public addMessage(message: AddMessageDto): Observable<void> {
+    return this.httpClient.post<void>('/messages/addmessage', message);
  
   }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,7 +56,12 @@ namespace API.Data
 				.HasForeignKey(x => x.RecipientId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 		}
 
-		public async Task<IEnumerable<FriendRequestRecord>> GetFriendRequestsForUser(int userId)
+    internal Task<object> GetRecentMessages()
+    {
+      throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<FriendRequestRecord>> GetFriendRequestsForUser(int userId)
 		{
 			return (await this.FriendRequests
 				.Include(x => x.Friend).Include(x => x.Requestor)

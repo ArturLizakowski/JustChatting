@@ -48,7 +48,7 @@ export class ChatMessengerComponent implements OnInit {
   add($event: { message: string; files: any[] }) {
     console.log($event);
     this.messageService
-      .add({ content: $event.message, recipientId: this.friend.id })
+      .addMessage({ content: $event.message, recipientId: this.friend.id })
       .subscribe(
         () => {
           this.getRecentMessages();
