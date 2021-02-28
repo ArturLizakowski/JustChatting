@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { NbToastrService, NbChatModule } from '@nebular/theme';
 import { Friend } from '../models/friend-request';
+import { interval, timer } from 'rxjs';
 
 @Component({
   selector: 'app-chat-messenger',
@@ -31,6 +32,7 @@ export class ChatMessengerComponent implements OnInit {
 
   @Input() public set friendInput(v: Friend) {
     this.friend = v;
+    this.messages = [];
     this.getRecentMessages();
   }
 
@@ -42,7 +44,9 @@ export class ChatMessengerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getRecentMessages();
+    interval(1000).subscribe((x) => {
+      this.getRecentMessages();
+    });
   }
 
   add($event: { message: string; files: any[] }) {
@@ -61,9 +65,15 @@ export class ChatMessengerComponent implements OnInit {
   }
 
   getRecentMessages() {
+    if (!this.friend) {
+      return;
+    }
     this.messageService.getRecentMessages(this.friend.id).subscribe(
       (currentMessage) => {
-        this.messages = currentMessage;
+        //// add only new messages to dislayed messages
+        for (let i = this.messages.length; i < currentMessage.length; i++) {
+          this.messages.push(currentMessage[i]);          
+        }        
       },
       (error) => {}
     );

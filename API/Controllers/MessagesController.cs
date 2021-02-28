@@ -56,7 +56,7 @@ namespace API.Controllers
 			.Select(message =>
 			{
 				return new MessageDto(message.Content, message.AuthorId == currentUserId, message.Modify);
-			}).OrderByDescending(x => x.ModifyDate);
+			}).OrderBy(x => x.ModifyDate);
 
 			return Ok(messageDtos);
 		}

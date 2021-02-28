@@ -1,9 +1,11 @@
 <nb-chat *ngIf="friend" [title]="friend?.displayName" size="large">
   <div *ngIf="!friend">No conversation selected.</div>
   <nb-chat-message
-    *ngFor="let massage of messages"
+    *ngFor="let message of messages"
     [title]="friend.displayName"
-    [message]=[massage.content]
+    [message]="message.content"
+    [reply]="message.fromMe === false"
+    [sender]="message.fromMe ? 'Me' : friend.displayName"
     size="large"
   >
   </nb-chat-message>
